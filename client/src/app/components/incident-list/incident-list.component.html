@@ -1,0 +1,50 @@
+<div class="tableau">
+    <ul>
+        <li>
+            <form (ngSubmit)="onSearch()" #f="ngForm">
+                <button type="submit" class="btn btn-outline-primary" style="margin-right: 15px;">
+                    <i class="fa fa-search"></i>
+                </button>
+                <input name="nickname" type="search" class="search" placeholder="Recherche">
+            </form>
+        </li>
+        <li>Filtrer</li>
+        <li>Trier</li>
+        <li class="btn btn-primary" (click)="onShow()">Nouvelle incident</li>
+    </ul>
+    <div class="row">
+        <div class="col1 col-6">
+            <div *ngFor="let incident of incidents">
+                <a (click)="displayComment()">
+                    <div class="card" *ngIf="incident.status === 'En cours'">
+
+                        <div class="card-body">
+                            <div>{{ incident.incidentType }}</div>
+                            <div>{{ incident.description }}</div>
+                            <div>{{ incident.user?.username }}</div>
+                            <div>{{ incident?.date_creation|date }}</div>
+                            <div style="color: rgb(255, 10, 10);font-weight: bold;">{{ incident?.status}}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col1 col-6">
+            <div *ngFor="let incident of incidents">
+                <div class="card" *ngIf="incident.status === 'Terminer'">
+                    <div class="card-body">
+                        <div>{{ incident.incidentType }}</div>
+                        <div>{{ incident.description }}</div>
+                        <div>{{ incident.user?.username }}</div>
+                        <div>{{ incident?.date_creation|date }}</div>
+                        <div style="color: rgb(0, 193, 0);font-weight: bold;">{{ incident?.status}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-comments></app-comments>
+
+<app-new-incident [hide]="show"></app-new-incident>

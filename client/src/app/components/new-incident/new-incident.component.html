@@ -1,0 +1,26 @@
+<div *ngIf="hide">
+    <div class="bg" (click)="onHide()"></div>
+    <div class="bg1">
+        <form class="form" (ngSubmit)="onSubmit()">
+            <select class="selection" name="" id="">
+                <option selected>select your device</option>
+                <option value="hardware">Hardware</option>
+                <option value="software">Software</option>
+            </select>
+            <h2 class="username offset-10">Username</h2>
+
+            <h2 class="comment">Description</h2>
+            <h2 class="username offset-10">En cours</h2>
+            <textarea class="form-control area" placeholder="Enter your description here" name="description"
+                [(ngModel)]="incident.description"></textarea>
+            <h2 class="comment">Comment</h2>
+            <h2 class="username offset-10">Username</h2>
+            <!-- <textarea class="form-control area" placeholder="Enter your solution here" name="solution"
+                [(ngModel)]="incident.comments"></textarea> -->
+            <button class="btn btn-primary save"(click)="onHide()">Save</button>
+
+            <button class="btn btn-primary done"(click)="onHide()">Terminer</button>
+        </form>
+
+    </div>
+</div>

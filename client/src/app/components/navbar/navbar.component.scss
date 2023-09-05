@@ -1,0 +1,47 @@
+.symbole
+{
+    background-color:rgba(0, 9, 247, 0.6700000166893005);
+    height:74px;
+    width:74px;
+    left:61px;
+    top:34px;
+    position:absolute;
+    border-radius:50%;
+}
+.logo{
+    position: absolute;
+    top: 34px;
+    left: 162px;
+    font-size: 57px;
+    text-align:left;
+    vertical-align:text-top;
+    font-family: sans-serif;
+}
+.username{
+    position: absolute;
+    left: 90vw;
+    top: 55px;
+    font-size: 25px;
+}
+.sideBar{
+    position: absolute;
+    background-color: #ffffff;
+    height: calc(100vh - 141px);
+    width: 474px;
+    top: 141px;
+    border-radius:0% 10px 10px 0% ;
+   
+}
+.navb{
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    list-style: none;
+}
+.item{
+
+    margin-bottom: 40px;
+}

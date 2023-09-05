@@ -1,0 +1,73 @@
+.tableau{
+    height:calc(100vh - 200px) ;
+    width:calc( 100vw - 1000px);
+    left:61px;
+    top:141px;
+    position:absolute;
+    background-color:#ffffff;
+    border-radius: 10px;
+}
+
+.btn{
+    position: relative;
+    font-size: 25px;
+    font-weight: bold;
+}
+ul{
+    position: relative;
+    left: calc(100vw - 1950px);
+    top: 20px;
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight: bold;
+    list-style: none;
+}
+li{
+    display: inline-block;
+    margin-left: 40px;
+}
+
+div td{
+    display: inline-block;
+    margin-right:100px ;
+    font-size: 18px;
+}
+
+.tableau .col1{
+    position: relative;
+    width: 100% - 53.2%;
+    left: 20px;
+    height: calc(100vh - 320px);
+    margin: 30px 10px 30px 20px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+.card{
+    margin-bottom: 10px;
+
+}
+.card-body {
+    display: flex;
+    justify-content: space-between;
+}
+.card-body div{
+    font-size: 20px;
+}
+.trie{
+    font-size: 25px;
+    margin-left: 10px;
+    margin-right: 50px;
+    font-family: sans-serif;
+}
+.search{
+    padding: 10px;
+    border: 0 solid;
+    border-radius: 10px;
+    background-color: rgb(235, 235, 235);
+    color: gray;
+}
+
+.card:hover{
+    background-color: rgb(231, 231, 231);
+}
