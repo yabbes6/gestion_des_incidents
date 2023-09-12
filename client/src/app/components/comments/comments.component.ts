@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommentsService } from 'src/app/services/comments.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Comment } from 'src/app/models/comment';
 import { Incident } from 'src/app/models/incident';
 import { IncidentsListService } from 'src/app/services/incidents-list.service';
@@ -14,15 +13,27 @@ export class CommentsComponent implements OnInit {
   comments?:Comment[];
   incidents?:Incident[];
 
-  constructor(private commentService:CommentsService,private incidentsListService:IncidentsListService){}
+
+  constructor(private incidentsListService:IncidentsListService){}
   
   ngOnInit(): void {
-    this.getAllComment();
-    this.getAllIncidents();
+    //this.getAllComment();
+    //this.getAllIncidents();
   }
 
-  private getAllComment(){
-    return this.commentService.getCommentList().subscribe(
+  /*private getAllComment(){
+    return this.incidentsListService.getCommentList().subscribe(
+      (data:Comment[])=>{
+        this.comments=data;
+      },
+      (error) => {
+        console.error("Error fetching incidents:", error);
+      }
+    );
+  }*/
+
+  private getIncidentComment(id:any){
+    return this.incidentsListService.getCommentList().subscribe(
       (data:Comment[])=>{
         this.comments=data;
       },
@@ -32,16 +43,15 @@ export class CommentsComponent implements OnInit {
     );
   }
 
-  private getAllIncidents() {
+  /*private getAllIncidents() {
     this.incidentsListService.getIncidentList().subscribe(
       (data:Incident[]) => {
-        this.incidents = data;
-        
+        this.incidents = data;  
       },
       (error) => {
         console.error("Error fetching incidents:", error);
       }
     );
-  }
+  }*/
 
 }

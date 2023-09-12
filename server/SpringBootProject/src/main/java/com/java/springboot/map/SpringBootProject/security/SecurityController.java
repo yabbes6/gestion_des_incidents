@@ -1,4 +1,4 @@
-package com.java.springboot.map.SpringBootProject.security;
+/*package com.java.springboot.map.SpringBootProject.security;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -57,4 +57,4 @@ public class SecurityController {
 		
 		return Map.of("access-token",jwt);
 	}
-}
+}*/

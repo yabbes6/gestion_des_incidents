@@ -8,7 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,18 +20,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Incident implements Serializable{
 	
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String description;
 	private LocalDate date_creation;
 	
     @OneToMany(mappedBy = "incident", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    //@JsonManagedReference
 	private List<Comment> comment;
     
     @ManyToOne // Many comments can be associated with one incident
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    //@JsonBackReference
 	private AppUser user;
 
 	private String incidentType;

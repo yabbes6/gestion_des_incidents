@@ -1,18 +1,20 @@
-import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import { Observable } from 'rxjs';
 
 
-export class authenticationGuard {
+export class authenticationGuard implements CanActivate{
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router : Router) { }
 
-  CanActivateFn(
+  canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isAuthenticated== true)
-    return true
-    else return false;
+    if (this.authService.isAuthenticated == true)
+      return true
+    else {
+      this.router.navigateByUrl("/login")
+      return false;}
   };
 
 }

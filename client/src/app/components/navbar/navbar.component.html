@@ -1,8 +1,13 @@
 <mat-toolbar class="topBar">
     <div class="symbole"></div>
     <h1 class="logo">MAP</h1>
-    <h2 class="username">username <button class="btn btn-info" (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg "></span>Login</button><button class="btn btn-info " routerLink="/login" (click)="logout()">Logout</button></h2>
-    
+    <h2 class="username" >{{ this.loginService.username}}
+        <button (click)="handleLogout()" *ngIf="this.loginService.username" class="btn btn-info">Logout</button>
+    </h2>
+    <div class="username" *ngIf="this.loginService.username == null">
+        <button routerLink="/login" class="btn btn-info ">Login</button>
+    </div>
+
 </mat-toolbar>
 <!-- <div class="sideBar">
     <ul class="navb">

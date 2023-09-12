@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IncidentsListService } from '../../services/incidents-list.service';
 import { Incident } from 'src/app/models/incident';
 import { Comment } from 'src/app/models/comment';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -12,26 +14,36 @@ import { Comment } from 'src/app/models/comment';
 export class IncidentListComponent implements OnInit {
 
   comments: Comment[] = [];
-  incidents: Incident[] = [];
-
   
-  show =false;
+  incidentRecherche:Incident[]=[];
+  nickname : string;
+  formLogin: FormGroup;
+  incidents: Incident[];
 
-  constructor(private incidentsListService: IncidentsListService) { }
+  show = false;
+
+  constructor(
+    private incidentsListService: IncidentsListService,
+    public authService: AuthService,
+    private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.getAllIncidents();
+
+    this.formLogin = this.fb.group({
+      nickname: this.fb.control(""),
+    })
   }
 
   onShow() {
     this.show = !this.show
   }
-
+  
+  
   private getAllIncidents() {
     this.incidentsListService.getIncidentList().subscribe(
-      (data:Incident[]) => {
+      (data:any) => {
         this.incidents = data;
-        
       },
       (error) => {
         console.error("Error fetching incidents:", error);
@@ -39,23 +51,35 @@ export class IncidentListComponent implements OnInit {
     );
   }
 
-  displayComment(){
-    console.log("display comments")  
-  }
 
-  onSearch() {
-  /*  if (this.searchQuery.trim() === '') {
-      // Handle empty search query
-      return;
-    }
-    this.incidentsListService.searchIncident(this.searchQuery).subscribe(
-      (data: Incident[]) => {
-        this.incidents = data;
+  displayComment(id: any) {
+
+    this.incidentsListService.getCommentsByIncidentId(id).subscribe(
+      (data: any) => {
+        this.comments = data;
       },
       (error) => {
-        console.log("Error fetching incidents:", error);
+        console.error("Error fetching comments:", error);
       }
-    );*/
+    );
   }
+
+
+
+  onSearch() {
+    this.incidentsListService.chercherIncident(this.nickname).subscribe(
+      (data: Incident[]) => {
+        this.incidentRecherche = data;
+      },
+      (error) => {
+        console.error("Error fetching incidents:", error);
+      }
+    );
+  }
+
+  onModify(){
+
+  }
+  
 
 }

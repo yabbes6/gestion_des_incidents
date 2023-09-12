@@ -1,7 +1,7 @@
 <div *ngIf="hide">
     <div class="bg" (click)="onHide()"></div>
     <div class="bg1">
-        <form class="form" (ngSubmit)="onSubmit()">
+        <form class="form" (ngSubmit)="createIncident()">
             <select class="selection" name="" id="">
                 <option selected>select your device</option>
                 <option value="hardware">Hardware</option>
@@ -19,7 +19,7 @@
                 [(ngModel)]="incident.comments"></textarea> -->
             <button class="btn btn-primary save"(click)="onHide()">Save</button>
 
-            <button class="btn btn-primary done"(click)="onHide()">Terminer</button>
+            <button type="submit" class="btn btn-primary done">Terminer</button>
         </form>
 
     </div>

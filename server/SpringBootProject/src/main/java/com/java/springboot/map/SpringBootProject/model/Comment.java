@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Comment implements Serializable {
 
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String comment;
 	private LocalDate date_comment;
@@ -31,7 +31,7 @@ public class Comment implements Serializable {
 
 	@ManyToOne 
 	@JoinColumn(name = "user_id")
-	@JsonBackReference
+	//@JsonBackReference
 	private AppUser user;
 
 	public String getComment() {
@@ -74,14 +74,14 @@ public class Comment implements Serializable {
 		this.date_comment = date_comment;
 	}
 
-	public Comment(Long id, String comment, String urlImage,LocalDate date_comment, Incident incident, AppUser user) {
+	public Comment(Long id, String comment, String urlImage,LocalDate date_comment, Incident incident) {
 		super();
 		this.id = id;
 		this.comment = comment;
 		this.date_comment = date_comment;
 		this.urlImage = urlImage;
 		this.incident = incident;
-		this.user = user;
+		//this.user = user;
 	}
 
 	public Comment() {

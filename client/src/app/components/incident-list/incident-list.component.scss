@@ -1,8 +1,8 @@
 .tableau{
-    height:calc(100vh - 200px) ;
+    height:calc(100vh - 130px) ;
     width:calc( 100vw - 1000px);
     left:61px;
-    top:141px;
+    top:100px;
     position:absolute;
     background-color:#ffffff;
     border-radius: 10px;
@@ -13,11 +13,17 @@
     font-size: 25px;
     font-weight: bold;
 }
-ul{
+li{
     position: relative;
-    left: calc(100vw - 1950px);
-    top: 20px;
-    font-size: 25px;
+    top: 10px;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    list-style: none;
+}
+.li{
+    position: relative;
+    font-size: 20px;
     font-family: sans-serif;
     font-weight: bold;
     list-style: none;
@@ -35,23 +41,22 @@ div td{
 
 .tableau .col1{
     position: relative;
-    width: 100% - 53.2%;
-    left: 20px;
+    width: 100% - 52.5%;
+    
     height: calc(100vh - 320px);
-    margin: 30px 10px 30px 20px;
+    margin: 0px 10px 30px 20px;
     background-color: rgb(255, 255, 255);
     padding: 20px;
 }
 
-.card{
-    margin-bottom: 10px;
-
+.card1{
+    margin-bottom: 20px;
 }
-.card-body {
+.card-body1 {
     display: flex;
     justify-content: space-between;
 }
-.card-body div{
+.card-body1 div{
     font-size: 20px;
 }
 .trie{
@@ -64,10 +69,32 @@ div td{
     padding: 10px;
     border: 0 solid;
     border-radius: 10px;
+    width: 820px;
     background-color: rgb(235, 235, 235);
     color: gray;
 }
 
-.card:hover{
+.card1:hover{
     background-color: rgb(231, 231, 231);
+}
+
+
+.tableauComment{
+    height:calc(100vh - 130px);
+    width: calc(100vw - 65vw);
+    top: 100px;
+    left:calc(100vw - 920px) ;
+    position:absolute;
+    padding: 20px;
+    background-color:#ffffff;
+    border-radius: 10px;
+}
+.card2{
+    top: 3%;
+    margin-bottom: 10px;
+}
+
+.card-body2 {
+    display: flex;
+    justify-content: space-between;
 }

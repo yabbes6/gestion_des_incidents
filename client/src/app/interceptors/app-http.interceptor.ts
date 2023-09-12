@@ -5,32 +5,37 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 
-@Injectable()
+/*@Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthService) { }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    const newRequest = request.clone({
-      headers : 
-        request.headers.set('Authorization', 'Bearer '+ this.authService.accessToken)
-      });
-      console.log(newRequest)
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     //let newRequest = request.clone({headers: request.headers.set('Authorization', "Bearer " + this.authService.accessToken)});
-    return next.handle(newRequest);
-    // console.log(!request.url.includes('/auth/login'))
-    // if (!request.url.includes('/auth/login')) {
-    //   console.log("yassine")
-      
-    // }else{
-    //   console.log("abbes")
-    //    return next.handle(request);}
+
+    console.log("********", request.url)
+    if (!request.url.includes('')) {
+      console.log("yassine")
+      let newRequest = request.clone({
+        headers:
+          request.headers.set('Authorization', 'Bearer ' + this.authService.accessToken)
+      })
+      return next.handle(newRequest).pipe(
+        catchError(err => {
+          if (err.status == 401)
+           // this.authService.logout()
+          return throwError(err.message)
+        })
+      );
+    } else {
+      console.log("abbes")
+      return next.handle(request);
+    }
 
 
 
   }
-}
+}*/

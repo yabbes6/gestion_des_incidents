@@ -13,52 +13,63 @@ import com.java.springboot.map.SpringBootProject.repository.CommentRepository;
 import com.java.springboot.map.SpringBootProject.repository.IncidentRepository;
 import com.java.springboot.map.SpringBootProject.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @RestController
 @RequestMapping
-//@Slf4j
+@Slf4j
 @CrossOrigin(origins = "http://localhost:4200")
 public class IncidentController {
 	
 	private final IncidentRepository incidentRepository;
 	private final CommentRepository commentRepository;
-	private final UserRepository userRepository;
 	
 	public IncidentController(IncidentRepository incidentRepository, CommentRepository commentRepository, UserRepository userRepository) {
 		this.incidentRepository = incidentRepository;
 		this.commentRepository = commentRepository;
-		this.userRepository = userRepository;
 		
 	}
 	
 	
 	@GetMapping("/incidents")
-	@PreAuthorize("hasAuthority('USER')")
+	//@PreAuthorize("hasAuthority('SCOPE_USER')")
 	public List<Incident> list_incident(){
 		return incidentRepository.findAll();
 	}
 	@GetMapping("/comments")
-	@PreAuthorize("hasAuthority('USER')")
+	//@PreAuthorize("hasAuthority('SCOPE_USER')")
 	public List<Comment> list_comment(){
 		return commentRepository.findAll();
 	}
-	@GetMapping("/users")
-	@PreAuthorize("hasAuthority('USER')")
-	public List<AppUser> list_user(){
-		return userRepository.findAll();
-	}
 	
 	@PostMapping("/incidents")
-	//@PreAuthorize("hasAuthority('ADMIN')")
+	//@PreAuthorize("hasAuthority('SCOPE_ADMIN')")
 	public Incident createIncident(@RequestBody Incident incident) {
+		
 		return incidentRepository.save(incident);
 	}
 	
+	@GetMapping("/incidents/{id}")
+	public List<Comment> appointmentList(@PathVariable Long id){
+        Incident incident = incidentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("invalid patient ID"));
+        List<Comment> commentList = commentRepository.findByIncident(incident);
+
+        return commentList;
+    }
+	
 	@GetMapping("/recherche")
 	public List<Incident> chercherIncident(@RequestParam String nickname) {
-		
 		return incidentRepository.searchByNickname(nickname);
 	}
+	
+	/*@PostMapping("/users")
+	public Incident createUser(@RequestBody String username,@RequestBody Incident incident) {
+		AppUser user = userRepository.findByName(username);
+		
+		Incident savedUser = incidentRepository.save(incident);
+		return savedUser;
+	}*/
 	
 	/*@GetMapping("/modify")
 	public Incident modify(Long id) {

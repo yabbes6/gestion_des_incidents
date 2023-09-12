@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './components/admin/admin.component';
-import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
+//import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatListModule } from '@angular/material/list';
@@ -57,7 +57,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS , useClass: AppHttpInterceptor , multi : true},
+    //{provide: HTTP_INTERCEPTORS , useClass: AppHttpInterceptor , multi : true},
   ],
   bootstrap: [AppComponent]
 })

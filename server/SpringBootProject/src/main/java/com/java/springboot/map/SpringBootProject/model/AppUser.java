@@ -1,38 +1,34 @@
 package com.java.springboot.map.SpringBootProject.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//import javax.persistence.*;
+import javax.persistence.*;
 
-import jakarta.persistence.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "utilisateur")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class AppUser implements Serializable {
+public class AppUser {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nom;
 	private String prenom;
-	
+	@Column(unique = true)
 	private String username;
+	@JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
 	private String password;
-	private Collection<String> roles;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Collection<AppRole> roles = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<Comment> comments;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<Incident> incidents;
 
 	public String getNom() {
@@ -83,11 +79,11 @@ public class AppUser implements Serializable {
 		this.incidents = incident;
 	}
 
-	public Collection<String> getRoles() {
+	public Collection<AppRole> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Collection<String> roles) {
+	public void setRoles(Collection<AppRole> roles) {
 		this.roles = roles;
 	}
 
@@ -100,7 +96,7 @@ public class AppUser implements Serializable {
 	}
 
 	public AppUser(Long id, String nom, String prenom, String username, String password, List<Incident> incident,
-			List<Comment> comments,Collection<String> roles) {
+			List<Comment> comments, Collection<AppRole> roles) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -109,7 +105,7 @@ public class AppUser implements Serializable {
 		this.password = password;
 		this.comments = comments;
 		this.incidents = incident;
-		this.roles=roles;
+		this.roles = roles;
 	}
 
 	public AppUser() {
