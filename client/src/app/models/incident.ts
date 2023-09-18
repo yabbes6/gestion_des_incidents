@@ -6,7 +6,7 @@ export class Incident{
     description?:string
     date_creation?:Date
     comment?:Comment[]
-    user?:User
+    user?:string
     incidentType?:string
     priorite?:string
     status?:string

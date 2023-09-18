@@ -26,16 +26,13 @@ public class Incident implements Serializable{
 	private LocalDate date_creation;
 	
     @OneToMany(mappedBy = "incident", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonManagedReference
+    @JsonManagedReference
 	private List<Comment> comment;
-    
-    @ManyToOne // Many comments can be associated with one incident
-    @JoinColumn(name = "user_id")
-    //@JsonBackReference
-	private AppUser user;
+
+	private String user;
 
 	private String incidentType;
-	private String priorite;
+	//private String priorite;
 	private String status;
 	
 	public Long getId() {
@@ -69,12 +66,7 @@ public class Incident implements Serializable{
 	public void setIncidentType(String incidentType) {
 		this.incidentType = incidentType;
 	}
-	public String getPriorite() {
-		return priorite;
-	}
-	public void setPriorite(String priorite) {
-		this.priorite = priorite;
-	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -82,24 +74,24 @@ public class Incident implements Serializable{
 		this.status = status;
 	}
 	public Incident(Long id, String description, LocalDate date_creation, 
-			String incidentType,List<Comment> comment, String priorite, String status,AppUser user) {
+			String incidentType,List<Comment> comment, String priorite, String status,String user) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.date_creation = date_creation;
 		this.comment = comment;
 		this.incidentType = incidentType;
-		this.priorite = priorite;
+		//this.priorite = priorite;
 		this.status = status;
 		this.user=user;
 	}
 	public Incident() {
 		// TODO Auto-generated constructor stub
 	}
-	public AppUser getUser() {
+	public String getUser() {
 		return user;
 	}
-	public void setUser(AppUser user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 	

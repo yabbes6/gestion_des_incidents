@@ -20,7 +20,7 @@ export class AuthService {
   constructor(private http: HttpClient,private router:Router ) { }
 
 
-  /*public login(username: string, password: string) {
+  public login(username: string, password: string) {
     let options = {
       headers: new HttpHeaders().set("Content-Type","application/x-www-form-urlencoded")
     }
@@ -60,7 +60,7 @@ export class AuthService {
       this.loadProfile({"access-token" : token});
       this.router.navigateByUrl("/");
     }
-  }*/
+  }
 }
 
 

@@ -29,10 +29,8 @@ public class Comment implements Serializable {
 	@JsonBackReference
 	private Incident incident;
 
-	@ManyToOne 
-	@JoinColumn(name = "user_id")
-	//@JsonBackReference
-	private AppUser user;
+
+	private String user;
 
 	public String getComment() {
 		return comment;
@@ -58,11 +56,11 @@ public class Comment implements Serializable {
 		this.incident = incident;
 	}
 
-	public AppUser getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(AppUser user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 
@@ -74,14 +72,14 @@ public class Comment implements Serializable {
 		this.date_comment = date_comment;
 	}
 
-	public Comment(Long id, String comment, String urlImage,LocalDate date_comment, Incident incident) {
+	public Comment(Long id, String comment, String urlImage,LocalDate date_comment, Incident incident,String user) {
 		super();
 		this.id = id;
 		this.comment = comment;
 		this.date_comment = date_comment;
 		this.urlImage = urlImage;
 		this.incident = incident;
-		//this.user = user;
+		this.user = user;
 	}
 
 	public Comment() {

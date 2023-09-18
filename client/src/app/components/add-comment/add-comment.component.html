@@ -1,0 +1,13 @@
+<form [formGroup]="commentForm" (ngSubmit)="handleComment()">
+    <h5>Commentaire :</h5>
+    
+    <div style="display: inline-block;" class="row">
+        <input type="text" class="form-control" formControlName="comment">
+        <input type="hidden" class="form-control"  formControlName="date_solution">
+        <input type="hidden" class="form-control"  formControlName="incident">
+        <input type="hidden" class="form-control"  formControlName="user">
+
+
+    </div>
+    <button type="submit" style="display: inline-block;" class="btn btn-info"><i class="fa fa-send"></i></button>
+</form>

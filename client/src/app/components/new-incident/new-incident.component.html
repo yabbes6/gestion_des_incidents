@@ -1,26 +1,33 @@
-<div *ngIf="hide">
-    <div class="bg" (click)="onHide()"></div>
-    <div class="bg1">
-        <form class="form" (ngSubmit)="createIncident()">
-            <select class="selection" name="" id="">
-                <option selected>select your device</option>
-                <option value="hardware">Hardware</option>
-                <option value="software">Software</option>
-            </select>
-            <h2 class="username offset-10">Username</h2>
+<div class="container">
+    <form class="card" [formGroup]="incidentForm" (ngSubmit)="onSubmit()">
+        <div class="card-header">
+            <h1>Nouvelle incident</h1>
+        </div>
+        <div class="card-body">
+            <div>
+                <select class="selection" formControlName="incidentType">
+                    <option value="hardware">Hardware</option>
+                    <option value="software">Software</option>
+                </select>
+                <input class="offset-10" type="hidden" formControlName="user" value="{{this.loginService.username}}">
+                <label for="">{{this.loginService.username}}</label>
+                <input class="offset-10" type="hidden" formControlName="date_creation" value="{{this.date_creation}}">
+                <label for="">{{this.date_creation}}</label>
 
-            <h2 class="comment">Description</h2>
-            <h2 class="username offset-10">En cours</h2>
-            <textarea class="form-control area" placeholder="Enter your description here" name="description"
-                [(ngModel)]="incident.description"></textarea>
-            <h2 class="comment">Comment</h2>
-            <h2 class="username offset-10">Username</h2>
-            <!-- <textarea class="form-control area" placeholder="Enter your solution here" name="solution"
-                [(ngModel)]="incident.comments"></textarea> -->
-            <button class="btn btn-primary save"(click)="onHide()">Save</button>
+            </div>
+            <div>
 
-            <button type="submit" class="btn btn-primary done">Terminer</button>
-        </form>
+                <label class="label">Description</label>
+                <select class="offset-10 selection" formControlName="status">
+                    <option value="En cours">En cours</option>
+                    <option value="Terminer">Terminer</option>
+                </select>
+                <textarea class="area form-control" placeholder="Enter your description here"
+                    formControlName="description"></textarea>
+            </div>
+            <button type="submit" [disabled]="formValidators()" class="btn btn-primary done">Save</button>
 
-    </div>
+        </div>
+    </form>
+
 </div>

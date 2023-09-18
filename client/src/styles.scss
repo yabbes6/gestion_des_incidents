@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "node_modules/font-awesome/css/font-awesome.min.css";
+
+.red-snackbar{
+    background: rgb(205, 0, 0) !important;
+    color: rgb(0, 0, 0) !important;
+}
+.green-snackbar{
+    background: rgb(3, 197, 0) !important;
+    color: rgb(0, 0, 0) !important;
+}

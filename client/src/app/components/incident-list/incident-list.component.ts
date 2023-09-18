@@ -4,6 +4,7 @@ import { Incident } from 'src/app/models/incident';
 import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 
 @Component({
@@ -15,7 +16,6 @@ export class IncidentListComponent implements OnInit {
 
   comments: Comment[] = [];
   
-  incidentRecherche:Incident[]=[];
   nickname : string;
   formLogin: FormGroup;
   incidents: Incident[];
@@ -44,6 +44,8 @@ export class IncidentListComponent implements OnInit {
     this.incidentsListService.getIncidentList().subscribe(
       (data:any) => {
         this.incidents = data;
+        /*this.incidents.sort((a, b) => 
+          new Date(a.date_creation) - new Date(b.date_creation))*/// Compare in descending order);
       },
       (error) => {
         console.error("Error fetching incidents:", error);
@@ -69,7 +71,7 @@ export class IncidentListComponent implements OnInit {
   onSearch() {
     this.incidentsListService.chercherIncident(this.nickname).subscribe(
       (data: Incident[]) => {
-        this.incidentRecherche = data;
+        this.incidents = data;
       },
       (error) => {
         console.error("Error fetching incidents:", error);

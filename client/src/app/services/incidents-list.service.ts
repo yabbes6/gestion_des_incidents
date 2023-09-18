@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Incident } from '../models/incident';
 import { Comment } from '../models/comment';
 import { AuthService } from './auth/auth.service';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,17 @@ import { AuthService } from './auth/auth.service';
 export class IncidentsListService {
 
   baseUrl = "http://localhost:8089";
+  idIncident:any;
 
 
-  constructor(private http: HttpClient,private authService:AuthService) { }
+  constructor(private http: HttpClient,private loginService:LoginService) { }
 
   getIncidentList(){
     return this.http.get(this.baseUrl + "/incidents");
   }
 
   public saveIncident(incident: Incident){
-    return this.http.post(this.baseUrl + "/incident", incident);
+    return this.http.post(this.baseUrl + "/incidents", incident);
   }
 
   public searchIncidents(keyword: string): Observable<Array<Incident>> {
@@ -45,14 +47,27 @@ export class IncidentsListService {
   }
 
   createIncident(incident: Incident): Observable<Incident> {
-    const url = `${this.baseUrl}/incidents`;
+    const url = `${this.baseUrl}/new-incidents`;
+    console.log(incident)
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': this.authService.accessToken // Replace with your JWT token
+      'Authorization': this.loginService.jwt // Replace with your JWT token
     });
 
-    return this.http.post<Incident>(url, incident, { headers });
+    return this.http.post<Incident>(url, incident);
   }
+
+  public addCommment(incidentId: number):Observable<Comment>{
+    const url = `${this.baseUrl}/incidents/${incidentId}`;
+    this.idIncident=incidentId;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': this.loginService.jwt // Replace with your JWT token
+    });
+    return this.http.post<Comment>(url,incidentId);
+  }
+
+  
 
 
   /*searchIncident(nickname:string): Observable<Incident[]> {

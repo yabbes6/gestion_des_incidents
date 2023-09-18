@@ -1,6 +1,7 @@
 package com.java.springboot.map.SpringBootProject;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,18 @@ public class SpringBootProjectApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		accountServices.save(new AppRole(null, "USERS"));
+		/*accountServices.save(new AppRole(null, "USER"));
 		accountServices.save(new AppRole(null, "ADMIN"));
 		// accountServices.saveUser("yassine", "abbes", "yabbes", "12345", "12345");
-		Stream.of("user1", "user2", "user3", "admin").forEach(un -> {
+		/*Stream.of("user1", "user2", "user3", "admin").forEach(un -> {
 			accountServices.saveUser("abbes", "yassine", un, "1234", "1234");
 		});
+		accountServices.addRoleToUser("admin", "ADMIN");*/
+		
+		
+		/*accountServices.saveUser("yassine", "abbes", "yabbes", "12345");
+		accountServices.saveUser("yassine", "abbes", "admin", "12345");
+		
 		accountServices.addRoleToUser("admin", "ADMIN");
 
 		Incident incident = new Incident();
@@ -49,7 +56,7 @@ public class SpringBootProjectApplication implements CommandLineRunner {
 		// incident.setUser(user);
 		// incident.setComment(null);
 		incident.setIncidentType("fofogo");
-		incident.setPriorite("First");
+		
 		incident.setStatus("En cours");
 
 		incidentRepository.save(incident);
@@ -61,7 +68,7 @@ public class SpringBootProjectApplication implements CommandLineRunner {
 		// incident1.setUser(user);
 		// incident1.setComment(null);
 		incident1.setIncidentType("hardware");
-		incident1.setPriorite("First");
+		
 		incident1.setStatus("Terminer");
 
 		incidentRepository.save(incident1);
@@ -73,7 +80,7 @@ public class SpringBootProjectApplication implements CommandLineRunner {
 		// incident2.setUser(user);
 		// incident1.setComment(null);
 		incident2.setIncidentType("hardware");
-		incident2.setPriorite("First");
+		
 		incident2.setStatus("Terminer");
 
 		incidentRepository.save(incident2);
@@ -87,6 +94,19 @@ public class SpringBootProjectApplication implements CommandLineRunner {
 		commentRepository.save(comment2);
 		commentRepository.save(comment3);
 		commentRepository.save(comment4);
+		
+		accountServices.addIncidentToUser("admin",incident);
+		accountServices.addIncidentToUser("admin",incident2);
+		accountServices.addIncidentToUser("yabbes",incident1);
+		
+		accountServices.addCommentToUser("yabbes", comment4);
+		accountServices.addCommentToUser("yabbes", comment3);
+		accountServices.addCommentToUser("yabbes", comment2);
+		accountServices.addCommentToUser("admin", comment1);*/
+		
+		
+		
+		
 
 	}
 

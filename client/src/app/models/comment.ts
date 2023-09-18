@@ -7,6 +7,6 @@ export class Comment{
     date_solution?:Date;
     urlImage?:string;
     incident?:Incident;
-    user?:User
+    user?:string
 
 }

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -34,10 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// super.configure(http);
 		//http.formLogin();
-
+		
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/login/**","/register/**").permitAll();
+		http.authorizeRequests().antMatchers("/login/**","/register/**","/new-incidents/**","/incidents/**").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/**","/incidents/**","/recherche/**").permitAll();
 		http.authorizeRequests().antMatchers("/user/**").hasAuthority("ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();

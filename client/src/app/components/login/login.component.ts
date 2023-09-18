@@ -20,22 +20,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin(data: any) {
-    /*let username = this.formLogin.value.username;
-    let password = this.formLogin.value.password;
-    console.log(username,password);
-
-
-    this.authService.login(username,password).subscribe({
-      next : value => {
-        console.log('hhhh ',value)
-          this.authService.loadProfile(value);
-          this.router.navigateByUrl("/");
-      },error:err=>{
-        console.log('gggg',err);
-      }
-    })*/
-
-
     this.loginService.login(data).subscribe(resp => {
       console.log(resp.headers.get('authorization'),resp);
       let jwt = resp.headers.get('authorization');

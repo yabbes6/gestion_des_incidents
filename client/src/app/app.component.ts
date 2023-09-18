@@ -16,7 +16,7 @@ constructor(private authService:AuthService,private loginService:LoginService){
 
   }
   ngOnInit(): void {
-    //this.loginService.loadJwtTokenFromLocalStorage();
+    this.loginService.loadJwtTokenFromLocalStorage();
   }
 
 
@@ -27,7 +27,7 @@ constructor(private authService:AuthService,private loginService:LoginService){
     return this.loginService.isUser();
   }
 
-  iksAuthenticated(){
-    return this.loginService.isAuthenticated();
+  isAuthenticated(){
+    return this.loginService.isAuthenticated;
   }
 }

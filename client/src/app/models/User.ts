@@ -9,7 +9,5 @@ export class User{
     username?:string
     roles:Role[]
     password?:string
-    incident?:Incident[]
-    comment?:Comment[]
 
 }

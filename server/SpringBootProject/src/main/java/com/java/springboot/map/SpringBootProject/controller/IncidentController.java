@@ -1,8 +1,11 @@
 package com.java.springboot.map.SpringBootProject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.swing.text.html.Option;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,7 @@ import com.java.springboot.map.SpringBootProject.model.Incident;
 import com.java.springboot.map.SpringBootProject.repository.CommentRepository;
 import com.java.springboot.map.SpringBootProject.repository.IncidentRepository;
 import com.java.springboot.map.SpringBootProject.repository.UserRepository;
+import com.java.springboot.map.SpringBootProject.services.AccountServices;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,10 +28,14 @@ public class IncidentController {
 	
 	private final IncidentRepository incidentRepository;
 	private final CommentRepository commentRepository;
+	private final AccountServices accountService;
+	private final UserRepository userRepository;
 	
-	public IncidentController(IncidentRepository incidentRepository, CommentRepository commentRepository, UserRepository userRepository) {
+	public IncidentController(IncidentRepository incidentRepository, CommentRepository commentRepository, UserRepository userRepository,AccountServices accountService){
 		this.incidentRepository = incidentRepository;
 		this.commentRepository = commentRepository;
+		this.accountService = accountService;
+		this.userRepository = userRepository;
 		
 	}
 	
@@ -43,15 +51,20 @@ public class IncidentController {
 		return commentRepository.findAll();
 	}
 	
-	@PostMapping("/incidents")
-	//@PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+	@PostMapping("/new-incidents")
 	public Incident createIncident(@RequestBody Incident incident) {
+		try {
+			System.out.println(incident.getUser());
+			return incidentRepository.save(incident);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 		
-		return incidentRepository.save(incident);
 	}
 	
 	@GetMapping("/incidents/{id}")
-	public List<Comment> appointmentList(@PathVariable Long id){
+	public List<Comment> commentsList(@PathVariable Long id){
         Incident incident = incidentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("invalid patient ID"));
         List<Comment> commentList = commentRepository.findByIncident(incident);
 
@@ -63,19 +76,21 @@ public class IncidentController {
 		return incidentRepository.searchByNickname(nickname);
 	}
 	
-	/*@PostMapping("/users")
-	public Incident createUser(@RequestBody String username,@RequestBody Incident incident) {
-		AppUser user = userRepository.findByName(username);
+	@PostMapping("/incidents")
+	public Comment addCommentToIncident(@RequestBody Comment comment,@RequestParam Long id) {
+		Incident incident = incidentRepository.findById(id).orElseThrow();
+		incident.getComment().add(comment);
+		incidentRepository.save(incident);
 		
-		Incident savedUser = incidentRepository.save(incident);
-		return savedUser;
-	}*/
+		return commentRepository.save(comment);
+	}
 	
-	/*@GetMapping("/modify")
-	public Incident modify(Long id) {
-		Optional<Incident> incident = incidentRepository.findById(id);
-		
-		return incidentRepository.saveAll(incident);
-	}*/
+	
+	
+	
+	
+	
+	
+	
 	
 }
