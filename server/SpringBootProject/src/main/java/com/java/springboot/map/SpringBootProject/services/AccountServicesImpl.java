@@ -23,15 +23,13 @@ public class AccountServicesImpl implements AccountServices{
 
 	private UserRepository appUserRepository;
 	private AppRoleRepository appRoleRepository;
-	private IncidentRepository incidentRepository;
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
-	public AccountServicesImpl(UserRepository appUserRepository, AppRoleRepository appRoleRepository ,IncidentRepository incidentRepository,BCryptPasswordEncoder bcryptPasswordEncoder) {
+	public AccountServicesImpl(UserRepository appUserRepository, AppRoleRepository appRoleRepository ,BCryptPasswordEncoder bcryptPasswordEncoder) {
 		this.appUserRepository = appUserRepository;
 		this.appRoleRepository = appRoleRepository;
-		this.incidentRepository= incidentRepository;
 		this.bCryptPasswordEncoder = bcryptPasswordEncoder;
 	}
 
@@ -41,6 +39,8 @@ public class AccountServicesImpl implements AccountServices{
 		
 		AppUser user = appUserRepository.findByUsername(username);
 		
+		if (user == null) {
+			System.out.println(true);
 		AppUser appUser = new AppUser();
 		
 		appUser.setNom(nom);
@@ -50,7 +50,11 @@ public class AccountServicesImpl implements AccountServices{
 		
 		appUserRepository.save(appUser);
 		addRoleToUser(username,"USER");
-		return appUser;
+		return appUser;}
+		else {
+			System.out.println(false);
+			return null;
+		}
 	}
 	
 	
@@ -66,12 +70,17 @@ public class AccountServicesImpl implements AccountServices{
 
 	@Override
 	public void addRoleToUser(String username, String rolename) {
+		System.out.println(true);
 		AppUser appUser = appUserRepository.findByUsername(username);
-		AppRole appRole = appRoleRepository.findByRolename(rolename); 
-		appUser.getRoles().add(appRole);
-		
-		
+		List<AppRole> appRole = appRoleRepository.findAllByRolename(rolename); 
+		appUser.getRoles().add(appRole.get(0));
+		System.out.println(appRole.size());
 	}
+	
+	 /*public boolean usernameExists(String username) {
+	        // Implement logic to check if the username already exists in your UserRepository
+	        return appUserRepository.existsByUsername(username);
+	   }*/
 
 
 }

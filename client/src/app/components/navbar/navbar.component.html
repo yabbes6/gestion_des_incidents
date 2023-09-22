@@ -3,10 +3,11 @@
     <h1 ><a class="logo" routerLink="/">MAP</a></h1>
     <h2 class="username" *ngIf="this.loginService.isAuthenticated" >{{ this.loginService.username}}
         <button (click)="handleLogout()" class="btn btn-info">Logout</button>
+        <button *ngIf="this.loginService.isAdmin()" routerLink="/register" class="btn btn-info ">Register</button>
     </h2>
-    <div class="username" *ngIf="!this.loginService.isAuthenticated">
+    <div class="login" *ngIf="!this.loginService.isAuthenticated">
         <button routerLink="/login" class="btn btn-info ">Login</button>
-        <button routerLink="/register" class="btn btn-info ">Register</button>
+        
     </div>
    
 </mat-toolbar>

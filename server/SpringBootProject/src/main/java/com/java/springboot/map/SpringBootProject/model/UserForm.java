@@ -2,41 +2,26 @@ package com.java.springboot.map.SpringBootProject.model;
 
 public class UserForm{
 	
-	private String nom;
-	private String prenom;
-	private String username;
-	private String password;
-	private String confirmedPassword;
+	private boolean success;
+	private String message;
 	
-	public String getNom() {
-		return nom;
+	
+	public UserForm(boolean success,String message) {
+		super();
+		this.success = success;
+		this.message = message;
 	}
-	public void setNom(String nom) {
-		this.nom = nom;
+	public boolean getUsername() {
+		return success;
 	}
-	public String getPrenom() {
-		return prenom;
-	}
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(boolean success) {
+		this.success = success;
 	}
 	public String getPassword() {
-		return password;
+		return message;
 	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getConfirmedPassword() {
-		return confirmedPassword;
-	}
-	public void setConfirmedPassword(String confirmedPassword) {
-		this.confirmedPassword = confirmedPassword;
+	public void setPassword(String message) {
+		this.message = message;
 	}
 	
 }

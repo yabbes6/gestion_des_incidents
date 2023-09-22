@@ -13,6 +13,7 @@ export class IncidentsListService {
 
   baseUrl = "http://localhost:8089";
   idIncident:any;
+  idIncident2:any;
 
 
   constructor(private http: HttpClient,private loginService:LoginService) { }
@@ -50,24 +51,23 @@ export class IncidentsListService {
     const url = `${this.baseUrl}/new-incidents`;
     console.log(incident)
     const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': this.loginService.jwt // Replace with your JWT token
+      'Content-Type' : 'application/x-www-form-urlencoded',
+      'Authorization' : this.loginService.jwt // Replace with your JWT token
     });
-
     return this.http.post<Incident>(url, incident);
   }
 
-  public addCommment(incidentId: number):Observable<Comment>{
-    const url = `${this.baseUrl}/incidents/${incidentId}`;
-    this.idIncident=incidentId;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': this.loginService.jwt // Replace with your JWT token
-    });
-    return this.http.post<Comment>(url,incidentId);
+  addCommentToIncident(incidentId: number, comment: Comment){
+    const url = `${this.baseUrl}/incidents?id=${incidentId}`;
+    return this.http.post(url, comment);
   }
 
-  
+  updateIncident(idIncident2: number, incident: Incident): Observable<any> {
+    const url = `${this.baseUrl}/new-incidents/${idIncident2}`;
+    return this.http.put(url, incident);
+  }
+ 
+
 
 
   /*searchIncident(nickname:string): Observable<Incident[]> {

@@ -27,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RegisterComponent } from './components/register/register.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { IncidentUpdateComponent } from './components/incident-update/incident-update.component';
 
 
 
@@ -41,6 +42,7 @@ import { AddCommentComponent } from './components/add-comment/add-comment.compon
     AdminComponent,
     RegisterComponent,
     AddCommentComponent,
+    IncidentUpdateComponent,
         
   ],
   imports: [

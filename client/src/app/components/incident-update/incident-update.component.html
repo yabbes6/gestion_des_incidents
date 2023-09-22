@@ -1,0 +1,32 @@
+<div class="container">
+    <form class="card" (submit)="updateIncident()">
+        <div class="card-header">
+            <h2>Update Incident</h2>
+        </div>
+        <!-- Add form fields for updating incident details (e.g., description, status, date_creation, incidentType) -->
+        <div class="card-body">
+            <div>
+                <select class="selection" name="incidentType" [(ngModel)]="updatedIncident.incidentType">
+                    <option value="hardware">Hardware</option>
+                    <option value="software">Software</option>
+                </select>
+                <input class="offset-10" type="hidden" name="username" [(ngModel)]="updatedIncident.user" value="{{this.loginService.username}}">
+                <label for="">{{this.loginService.username}}</label>
+                <input class="offset-10" type="hidden" name="date-creation" [(ngModel)]="updatedIncident.date_creation" value="{{this.date_creation}}">
+                <label for="">{{this.date_creation}}</label>
+            </div>
+
+        </div>
+        <div>
+
+            <label class="label">Description</label>
+            <select class="offset-10 selection" [(ngModel)]="updatedIncident.status" [value]="this.updatedIncident.status" name="status">
+                <option value="En cours">En cours</option>
+                <option value="Terminer">Terminer</option>
+            </select>
+            <textarea type="text" id="description" [(ngModel)]="updatedIncident.description" [value]="this.updatedIncident.description" name="description"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary done">Update</button>
+    </form>
+</div>

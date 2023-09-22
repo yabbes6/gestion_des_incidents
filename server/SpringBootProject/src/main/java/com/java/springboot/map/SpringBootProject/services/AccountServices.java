@@ -14,5 +14,6 @@ public interface AccountServices {
 	AppRole save(AppRole role);
 	AppUser loadUserByUsername(String username);
 	void addRoleToUser(String username,String rolename);
+	//boolean usernameExists(String username);
 	
 }

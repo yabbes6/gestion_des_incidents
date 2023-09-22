@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Incident } from 'src/app/models/incident';
 import { IncidentsListService } from 'src/app/services/incidents-list.service';
@@ -19,12 +19,13 @@ export class NewIncidentComponent implements OnInit {
   username = this.loginService.username;
   date_creation = new Date();
 
+
   @Input() hide=true 
           
 
   @Output() event= new EventEmitter<boolean>()
   
-  constructor(private route:Router,private incidentsListService: IncidentsListService,public loginService:LoginService,private fb: FormBuilder){}
+  constructor(private router:Router,private route: ActivatedRoute,private incidentsListService: IncidentsListService,public loginService:LoginService,private fb: FormBuilder){}
 
   ngOnInit(): void {
     this.incidentForm = this.fb.group({
@@ -34,12 +35,9 @@ export class NewIncidentComponent implements OnInit {
       status:[null,Validators.required],
       date_creation:[this.date_creation,Validators.required]
     });
+    //this.incidentId = +this.route.snapshot.paramMap.get('id');
   }
 
-  onHide(){
-    this.hide = !this.hide;
-    this.event.emit(this.hide)
-  }
 
   formValidators(){
     if(this.incidentForm.value == null ){
@@ -47,7 +45,6 @@ export class NewIncidentComponent implements OnInit {
       return true;
     }else 
       return false;
-    
 
   }
 
@@ -58,7 +55,7 @@ export class NewIncidentComponent implements OnInit {
         (incident)=>{
           console.log(incident)
           this.incident = incident;
-          this.route.navigate(['/']);
+          this.router.navigate(['/']);
         },
         (error)=>{
             console.error(error.message)

@@ -6,9 +6,12 @@ import java.util.Optional;
 import javax.swing.text.html.Option;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.java.springboot.map.SpringBootProject.exception.RessourceNotFoundException;
 import com.java.springboot.map.SpringBootProject.model.AppUser;
 import com.java.springboot.map.SpringBootProject.model.Comment;
 import com.java.springboot.map.SpringBootProject.model.Incident;
@@ -39,7 +42,11 @@ public class IncidentController {
 		
 	}
 	
-	
+	/*@GetMapping("/incidents/{id}")
+	public Incident incident(@PathVariable Long id) {
+		Incident incident = incidentRepository.findById(id).orElseThrow();
+		return incident;
+	}*/
 	@GetMapping("/incidents")
 	//@PreAuthorize("hasAuthority('SCOPE_USER')")
 	public List<Incident> list_incident(){
@@ -63,6 +70,30 @@ public class IncidentController {
 		
 	}
 	
+	@PutMapping("/new-incidents/{id}")
+	public Incident updateIncident(@PathVariable Long id, @RequestBody Incident updatedIncident) {
+	    // Find the existing incident by ID
+	    Optional<Incident> optionalIncident = incidentRepository.findById(id);
+
+	    if (optionalIncident.isPresent()) {
+	        // Get the existing incident
+	        Incident existingIncident = optionalIncident.get();
+
+	        // Update the fields of the existing incident with values from updatedIncident
+	        existingIncident.setDescription(updatedIncident.getDescription());
+	        existingIncident.setStatus(updatedIncident.getStatus());
+	        existingIncident.setDate_creation(updatedIncident.getDate_creation());
+	        existingIncident.setIncidentType(updatedIncident.getIncidentType());
+	        // Update other fields as needed
+
+	        // Save the modified incident back to the repository
+	        return incidentRepository.save(existingIncident);
+	    } else {
+	        throw new RessourceNotFoundException("Incident not found with ID: " + id);
+	    }
+	}
+	
+	
 	@GetMapping("/incidents/{id}")
 	public List<Comment> commentsList(@PathVariable Long id){
         Incident incident = incidentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("invalid patient ID"));
@@ -76,13 +107,49 @@ public class IncidentController {
 		return incidentRepository.searchByNickname(nickname);
 	}
 	
-	@PostMapping("/incidents")
-	public Comment addCommentToIncident(@RequestBody Comment comment,@RequestParam Long id) {
+	/*@PostMapping("/incidents/{id}")
+	public void addCommentToIncident(@RequestBody Comment comment,@PathVariable Long id) {
 		Incident incident = incidentRepository.findById(id).orElseThrow();
+		commentRepository.save(comment);
 		incident.getComment().add(comment);
-		incidentRepository.save(incident);
 		
-		return commentRepository.save(comment);
+		System.out.println(incident.getComment().lastIndexOf(comment));
+		//incidentRepository.save(incident);
+		
+	}*/
+	
+	@PostMapping("/incidents")
+	public ResponseEntity<String> addCommentToIncident(
+	    @RequestBody Comment comment,
+	    @RequestParam Long id
+	) {
+	    try {
+	        // Find the incident by ID
+	        Optional<Incident> optionalIncident = incidentRepository.findById(id);
+
+	        if (optionalIncident.isPresent()) {
+	            Incident incident = optionalIncident.get();
+
+	            // Set the incident for the comment
+	            comment.setIncident(incident);
+
+	            // Save the comment
+	            commentRepository.save(comment);
+
+	            // Add the comment to the incident's list of comments
+	            incident.getComment().add(comment);
+
+	            // Save the incident back to the repository
+	            incidentRepository.save(incident);
+
+	            return ResponseEntity.ok("Comment added successfully.");
+	        } else {
+	            return ResponseEntity.notFound().build(); // Incident not found
+	        }
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	            .body("Error adding comment: " + e.getMessage());
+	    }
 	}
 	
 	

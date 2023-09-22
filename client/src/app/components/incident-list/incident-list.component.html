@@ -6,23 +6,26 @@
             <button type="submit" class="btn btn-outline-primary" (click)="onSearch()" style="margin-right: 15px;">
                 <i class="fa fa-search"></i>
             </button>
-            <input type="text" class="search" placeholder="Recherche" (keypress)="onSearch()" [(ngModel)]="nickname">
+            <input type="text" class="search" placeholder="Recherche" (keyup.enter)="onSearch()" [(ngModel)]="nickname">
         </li>
-        <li class="btn btn-primary li" routerLink="/new-incident">Nouvelle
+       
+        <li *ngIf="this.loginService.isAuthenticated" class="btn btn-primary li" routerLink="/new-incident">Nouvelle
             incident</li>
     </ul>
     <div class="row">
         <div class="col1 col-6 scroll-bar">
             <div *ngFor="let incident of incidents">
-                <a (click)="displayComment(incident.id)">
+                <a (click)="displayComment(incident.id)" >
                     <div class="card card1" *ngIf="incident.status === 'En cours'">
                         <div style="margin: 10px; color: rgb(84, 84, 84);font-weight: bolder;">{{ incident.user }}</div>
                         <div class="card-body card-body1">
                             <!-- <div>{{ incident.incidentType }}</div> -->
                             <div style="width: 450px;">{{ incident.description }}</div>
                             <!-- <div>{{ incident?.date_creation|date}}</div> -->
-                            <div style="color: rgb(255, 10, 10);font-weight: bold;padding: 10px;margin-left: 20px;">{{
-                                incident?.status}}</div>
+                            <div>
+                                <div style="display: inline-block; color: rgb(255, 10, 10);font-weight: bold;padding: 10px;margin-left: 10px;">{{ incident.status }}</div>
+                                <a *ngIf="this.loginService.isAuthenticated" style="display: inline-block;" routerLink="/incidents/{{incident.id}}/update"><i class="fa fa-pencil-square fa-1x" aria-hidden="true"></i></a>
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -37,8 +40,9 @@
                             <!-- <div>{{ incident.incidentType }}</div> -->
                             <div style="width: 450px;">{{ incident.description }}</div>
                             <!-- <div>{{ incident?.date_creation|date }}</div> -->
-                            <div style="color: rgb(0, 193, 0);font-weight: bold;padding: 10px; margin-left: 20px;">{{
-                                incident?.status}}</div>
+                            <div>
+                                <div style="display: inline-block; color: rgb(0, 193, 0);font-weight: bold;padding: 10px; margin-left:10px;">{{incident?.status}}</div>
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -46,25 +50,35 @@
         </div>
     </div>
 </div>
-
-
 <div class="tableauComment">
-    <div class="tale">
-        <div class="card-body2 mb-2">
+    <div class="card-body2 mb-2">
             <h2>Commentaire</h2>
-            <div>
+            <div *ngIf="this.loginService.isAuthenticated">
                 <!-- <a class="btn btn-primary li modif" >Ajouter un commentaire</a> -->
-                <a class="btn btn-primary li modif" routerLink="/new-incident">modifier</a>
+                <a class="btn btn-primary li modif" routerLink="">modifier</a>
             </div>
         </div>
+    <div class="tale">
+        
         <div *ngFor="let i of comments">
             <div class="card card2">
+                <div style="margin: 5px 0px 0px 10px; color: rgb(84, 84, 84);font-weight: bolder;">{{i.user}}</div>
                 <div class="card-body card-body2">
                     <div>{{ i.comment }}</div>
-                    <div></div>
                 </div>
             </div>
         </div>
     </div>
-    <app-add-comment></app-add-comment>
+    <!-- <app-add-comment></app-add-comment> -->
+    <form *ngIf="this.loginService.isAuthenticated" [formGroup]="commentForm" (ngSubmit)="handleComment()">
+        <h5>Commentaire :</h5>
+        
+        <div style="display: inline-block;" class="row">
+            <input type="text" class="form-control form-control11"  formControlName="comment">
+            <input type="hidden" class="form-control"  formControlName="date_solution" value="{{this.date_creation}}">
+            <input type="hidden" class="form-control"  formControlName="incident" value=" {{this.loginService.username}} ">
+            <input type="hidden" class="form-control"  formControlName="user" value="{{this.username}}">
+        </div>
+        <button [disabled]="validComment()" type="submit" style="display: inline-block;" class="btn btn-info btn11"><i class="fa fa-send"></i></button>
+    </form>
 </div>
