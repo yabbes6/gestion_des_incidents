@@ -1,27 +1,13 @@
 .symbole
 {
-    background-color:rgba(0, 9, 247, 0.6700000166893005);
-    height:40px;
-    width:40px;
-    left:100px;
-    top:34px;
+    left: 80px;
+    top:5px;
     position:absolute;
     border-radius:50%;
 }
-.logo{
-    position: absolute;
-    top: 30px;
-    left: 155px;
-    font-size: 35px;
-    text-align:left;
-    vertical-align:text-top;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-decoration: none;
-}
 .username{
     position: absolute;
-    left: 81vw;
+    left: 86.5vw;
     top: 30px;
     font-size: 25px;
     font-weight: bold;
@@ -73,4 +59,21 @@
 .item{
 
     margin-bottom: 40px;
+}
+
+
+.navbar{
+    position: relative;
+    left: 300px;
+    top: 35px;
+}
+.navbar li{
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 50px;
+}
+.navbar li a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }

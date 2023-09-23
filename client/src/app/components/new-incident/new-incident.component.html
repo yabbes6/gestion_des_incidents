@@ -5,27 +5,28 @@
         </div>
         <div class="card-body">
             <div>
-                <select class="selection" formControlName="incidentType">
+                <h2 class="label">Type de materiel </h2><br/>
+                <select class="selection" style="width: 300px;" formControlName="incidentType">
                     <option value="hardware">Hardware</option>
                     <option value="software">Software</option>
                 </select>
                 <input class="offset-10" type="hidden" formControlName="user" value="{{this.loginService.username}}">
-                <label for="">{{this.loginService.username}}</label>
                 <input class="offset-10" type="hidden" formControlName="date_creation" value="{{this.date_creation}}">
-                <label for="">{{this.date_creation}}</label>
-
             </div>
             <div>
 
-                <label class="label">Description</label>
-                <select class="offset-10 selection"formControlName="status" >
-                    <option value="En cours">En cours</option>
-                    <option value="Terminer">Terminer</option>
-                </select>
+                
+                
+                <label class="label mt-5">Description</label>
                 <textarea class="area form-control" placeholder="Enter your description here"
                     formControlName="description"></textarea>
             </div>
-            <button type="submit" [disabled]="formValidators()" class="btn btn-primary done">Save</button>
+            <label class="label">Status</label><br/>
+            <select class="selection" style="width: 300px;" formControlName="status" >
+                <option value="En cours">En cours</option>
+                <option value="Terminer">Terminer</option>
+            </select><br/>
+            <button type="submit" [disabled]="formValidators()" class="btn btn-primary done mt-5">Save</button>
 
         </div>
     </form>

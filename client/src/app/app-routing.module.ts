@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:"",component:HomePageComponent},
   {path:"register",component:RegisterComponent},
   {path:"login",component:LoginComponent /*, canActivate: [authenticationGuard]*/},
-  {path :"admin",component:AdminComponent},
+  {path :"users",component:AdminComponent},
   {path:"new-incident",component:NewIncidentComponent},
   { path: 'incidents/:id/update', component: IncidentUpdateComponent },
   {path:"comment",component:AddCommentComponent},

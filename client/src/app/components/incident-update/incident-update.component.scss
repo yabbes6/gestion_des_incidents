@@ -5,12 +5,12 @@
 }
 
 .card {
-  width: 1500px;
-  height: 1000px;
+  width: 1200px;
+  height: 800px;
   margin: 0 auto;
   padding: 50px;
   position: relative;
-  top: 10%;
+  top: 20%;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -71,75 +71,3 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
-
-// .bg {
-//     position: absolute;
-//     background-color: rgba($color: #0000, $alpha: .6);
-//     width: 100vw;
-//     height: 100vh;
-// }
-// .bg1 {   
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
-
-// .form {
-//     background-color: aliceblue;
-//     width: 100vh;
-//     height: calc(100vh - 100px);
-//     margin-top: 50px;
-//     border-radius: 20px;
-//     z-index: 999;
-// }
-
-// .selection{
-//     padding: 15px;
-//     border: 0px solid gray;
-//     color: rgb(93, 93, 93);
-//     font-size: 20px;
-//     font-weight: bold;
-//     background-color: rgb(207, 207, 207);
-//     border-radius: 8px;
-//     position: relative;
-//     left: 70px;
-//     top: 50px;
-// }
-// .username{
-//     position: relative;
- 
-//     font-size: 25px;
-//     color: rgb(93, 93, 93);;
-// }
-// .area{
-//     position: relative;
-//     left: 70px;
-//     margin-top: 30px;
-//     width: calc(100vh - 140px);
-//     height: 250px;
-//     border-radius: 20px;
-//     font-size: 25px;
-//     padding: 20px;
-// }
-
-// .comment{
-//     color: rgb(93, 93, 93);
-//     font-size: 25px;
-//     font-weight: bold;
-//     position: relative;
-//     left: 70px;
-//     top: 50px;
-// }
-
-// .save{
-//     position: relative;
-//     left: 70px;
-//     top: 20px;
-//     font-size: 25px;
-// }
-// .done{
-//     position: relative;
-//     left: calc(100vh / 2.5);
-//     top: 300px;
-//     font-size: 25px;
-// }

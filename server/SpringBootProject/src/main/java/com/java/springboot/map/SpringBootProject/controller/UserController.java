@@ -2,15 +2,20 @@ package com.java.springboot.map.SpringBootProject.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.springboot.map.SpringBootProject.exception.RessourceNotFoundException;
@@ -52,67 +57,29 @@ public class UserController {
 
 		
 	}
-	/*@PostMapping("/register")
-	public ResponseEntity<?> register(@RequestBody AppUser user) {
-	    try {
-	        // Validate user input
-	        if (user.getUsername() == null || user.getPassword() == null) {
-	            return ResponseEntity.badRequest().body("Username and password are required.");
-	        }
-
-	        // Check if the username is already in use (You can implement this in your service)
-	        if (accountService.usernameExists(user.getUsername())) {
-	            return ResponseEntity.badRequest().body("Username already exists.");
-	        }
-
-	        // Hash the password
-	        String hashedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-
-	        // Save the user with the hashed password
-	        AppUser savedUser = accountService.saveUser(user.getNom(), user.getPrenom(), user.getUsername(), hashedPassword);
-
-	        return ResponseEntity.ok(savedUser);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering user.");
-	    }
-	}*/
 	
-	/*@PostMapping("/register")
-	public ResponseEntity<UserForm> register(@RequestBody AppUser user) {
-	    try {
-	        // Validate user input
-	        if (user.getUsername() == null || user.getPassword() == null) {
-	            return ResponseEntity.badRequest()
-	                .body(new UserForm(false, "Username and password are required."));
-	        }
-
-	        // Check if the username is already in use (You can implement this in your service)
-	        if (accountService.usernameExists(user.getUsername())) {
-	            return ResponseEntity.badRequest()
-	                .body(new UserForm(false, "Username already exists."));
-	        }
-
-	        // Hash the password
-	        String hashedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-
-	        // Save the user with the hashed password
-	        accountService.saveUser(user.getNom(), user.getPrenom(), user.getUsername(), hashedPassword);
-
-	        // Return a success response
-	        return ResponseEntity.ok(new UserForm(true, "Registration successful."));
-	    } catch (Exception e) {
-	    	e.getMessage();
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	            .body(new UserForm(false, "Error registering user."));
-	    }
-	}*/	
 
 	@GetMapping("/user")
 	// @PreAuthorize("hasAuthority('SCOPE_USER')")
 	public List<AppUser> list_user() {
 		return userRepository.findAll();
+	}
+	
+	@DeleteMapping("/user/{username}")
+	public ResponseEntity<Void> deleteUser(@PathVariable String username) {
+	    // Find the user by username
+	    AppUser user = userRepository.findByUsername(username);
+
+	    if (user == null) {
+	        // User not found, return a response with status code 404 (Not Found)
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    // Delete the user from the repository
+	    userRepository.delete(user);
+
+	    // Return a response with status code 204 (No Content) to indicate successful deletion
+	    return ResponseEntity.noContent().build();
 	}
 
 }

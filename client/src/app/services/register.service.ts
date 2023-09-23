@@ -35,5 +35,13 @@ export class RegisterService {
     return this.http.post<User>(this.urlBase+"/register",data);
   }
 
+  users():Observable<User>{
+    return this.http.get<User>(this.urlBase+"/user") ;   
+  }
+
+  deleteUser(username:any){
+    return this.http.delete<void>(`${this.urlBase}/${username}`);
+  }
+  
 
 }

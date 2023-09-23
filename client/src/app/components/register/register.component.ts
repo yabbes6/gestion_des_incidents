@@ -11,8 +11,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class RegisterComponent implements OnInit {
 
   registrationForm: FormGroup;
-  password:true
-  confirmedPassword:true
+ 
   responseMessage:any
 
   constructor(private fb: FormBuilder,private registerService:RegisterService,private router:Router) { }

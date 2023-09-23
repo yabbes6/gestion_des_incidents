@@ -6,27 +6,34 @@
         <!-- Add form fields for updating incident details (e.g., description, status, date_creation, incidentType) -->
         <div class="card-body">
             <div>
-                <select class="selection" name="incidentType" [(ngModel)]="updatedIncident.incidentType">
+                <h2 class="label">Type de materiel </h2><br />
+
+                <select class="selection" name="incidentType" style="width: 300px;"
+                    [(ngModel)]="updatedIncident.incidentType" [value]="">
                     <option value="hardware">Hardware</option>
                     <option value="software">Software</option>
                 </select>
-                <input class="offset-10" type="hidden" name="username" [(ngModel)]="updatedIncident.user" value="{{this.loginService.username}}">
-                <label for="">{{this.loginService.username}}</label>
-                <input class="offset-10" type="hidden" name="date-creation" [(ngModel)]="updatedIncident.date_creation" value="{{this.date_creation}}">
-                <label for="">{{this.date_creation}}</label>
+                <input class="offset-10" type="hidden" name="username" [(ngModel)]="updatedIncident.user"
+                    value="{{this.loginService.username}}">
+                <input class="offset-10" type="hidden" name="date-creation" [(ngModel)]="updatedIncident.date_creation"
+                    value="{{this.date_creation}}">
             </div>
 
-        </div>
-        <div>
 
-            <label class="label">Description</label>
-            <select class="offset-10 selection" [(ngModel)]="updatedIncident.status" [value]="this.updatedIncident.status" name="status">
+            <div>
+
+                <label class="label mt-5">Description</label>
+                <textarea type="text" class="area form-control" id="description"
+                    [(ngModel)]="updatedIncident.description" [value]="this.updatedIncident.description"
+                    name="description"></textarea>
+            </div>
+            <label class="label">Status</label><br />
+            <select class="selection" style="width: 300px;" [(ngModel)]="updatedIncident.status" name="status">
                 <option value="En cours">En cours</option>
                 <option value="Terminer">Terminer</option>
-            </select>
-            <textarea type="text" id="description" [(ngModel)]="updatedIncident.description" [value]="this.updatedIncident.description" name="description"></textarea>
-        </div>
+            </select><br/>
 
-        <button type="submit" class="btn btn-primary done">Update</button>
+            <button type="submit" class="btn btn-primary mt-5">Update</button>
+        </div>
     </form>
 </div>

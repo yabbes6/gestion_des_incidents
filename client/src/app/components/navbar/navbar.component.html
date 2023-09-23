@@ -1,15 +1,24 @@
 <mat-toolbar class="topBar">
-    <div class="symbole"></div>
-    <h1 ><a class="logo" routerLink="/">MAP</a></h1>
-    <h2 class="username" *ngIf="this.loginService.isAuthenticated" >{{ this.loginService.username}}
+
+    <a routerLink="/" class="symbole"><img style="width: 150px;" src="/assets/logo.png" alt=""></a>
+
+    <ul *ngIf="this.loginService.isAdmin()" class="navbar">
+        <li>
+            <a routerLink="/users">Utilisateurs</a>
+        </li>
+        <li>
+            <a routerLink="/register">Ajouter un Utilisateur</a>
+        </li>
+    </ul>
+
+
+    <h2 class="username" *ngIf="this.loginService.isAuthenticated">{{ this.loginService.username}}
         <button (click)="handleLogout()" class="btn btn-info">Logout</button>
-        <button *ngIf="this.loginService.isAdmin()" routerLink="/register" class="btn btn-info ">Register</button>
     </h2>
     <div class="login" *ngIf="!this.loginService.isAuthenticated">
         <button routerLink="/login" class="btn btn-info ">Login</button>
-        
     </div>
-   
+
 </mat-toolbar>
 <!-- <div class="sideBar">
     <ul class="navb">

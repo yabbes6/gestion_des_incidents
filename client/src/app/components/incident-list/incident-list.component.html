@@ -1,7 +1,5 @@
 <div class="tableau">
     <ul>
-        <li>Filtrer</li>
-        <li>Trier</li>
         <li>
             <button type="submit" class="btn btn-outline-primary" (click)="onSearch()" style="margin-right: 15px;">
                 <i class="fa fa-search"></i>
@@ -53,10 +51,6 @@
 <div class="tableauComment">
     <div class="card-body2 mb-2">
             <h2>Commentaire</h2>
-            <div *ngIf="this.loginService.isAuthenticated">
-                <!-- <a class="btn btn-primary li modif" >Ajouter un commentaire</a> -->
-                <a class="btn btn-primary li modif" routerLink="">modifier</a>
-            </div>
         </div>
     <div class="tale">
         

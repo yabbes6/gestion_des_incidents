@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar> -->
 <div class="container">
     <form class="card" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="card-header">
@@ -25,14 +25,7 @@
                 <label for="confirmedPassword">Confirmed password:</label>
                 <input type="password" id="confirmedPassword" autocomplete="current-password" formControlName="confirmedPassword" required>
             </div>
-            <!-- <div>
-                <label for="role">Role</label>
-                <select class="selection" id="role" formControlName="role">
-                    <option value="ADMIN">Admin</option>
-                    <option value="USER">User</option>
-                </select>
-            </div> -->
         </div>
-        <button type="submit"  [disabled]="onSubmitValidation()">Register</button>
+        <button type="submit" [disabled]="onSubmitValidation()">Register</button>
     </form>
 </div>
