@@ -71,9 +71,22 @@
     display: inline-block;
     font-size: 20px;
     margin-right: 50px;
+    
 }
 .navbar li a{
     text-decoration: none;
     color: black;
     font-weight: bold;
+    padding: 15px;
+    background-color: transparent;
+    border-radius: 10px;
+    transition: 1s;
+
+}
+.navbar li a:hover{
+    padding: 15px;
+    background-color: rgb(78, 78, 255);
+    color: white;
+    border-radius: 10px;
+
 }

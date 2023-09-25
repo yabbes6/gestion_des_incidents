@@ -34,6 +34,13 @@ public class SpringBootProjectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		if(accountServices.loadUserByUsername("ADMIN")==null) {
+		
+			accountServices.saveUser("yassine", "abbes", "ADMIN", "12345");
+			
+			accountServices.addRoleToUser("admin", "ADMIN");
+		}
 
 		/*accountServices.save(new AppRole(null, "USER"));
 		accountServices.save(new AppRole(null, "ADMIN"));
@@ -45,9 +52,7 @@ public class SpringBootProjectApplication implements CommandLineRunner {
 		
 		
 		/*accountServices.saveUser("yassine", "abbes", "yabbes", "12345");
-		accountServices.saveUser("yassine", "abbes", "admin", "12345");
 		
-		accountServices.addRoleToUser("admin", "ADMIN");
 
 		Incident incident = new Incident();
 
